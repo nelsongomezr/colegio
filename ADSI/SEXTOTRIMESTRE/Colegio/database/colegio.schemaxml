@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8mb4" collation="utf8mb4_general_ci">colegio</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="estudiante" view="colnames">
+<left>0</left>
+<top>0</top>
+<width>197</width>
+<height>248</height>
+<sql_create_table>CREATE TABLE `estudiante` (
+  `IdEstudiante` int(11) NOT NULL,
+  `Nombre_est` varchar(100) NOT NULL,
+  `Apellidos` varchar(100) NOT NULL,
+  `Direccion_est` varchar(100) NOT NULL,
+  `Telefono_est` bigint(11) NOT NULL,
+  `Password` varchar(50) NOT NULL,
+  `Estado` int(1) NOT NULL,
+  `Grupo_IdGrupo` int(11) NOT NULL,
+  `Grupo_Jornada_IdJornada` int(11) NOT NULL,
+  `Curso` varchar(10) NOT NULL,
+  PRIMARY KEY (`IdEstudiante`),
+  KEY `Grupo_IdGrupo` (`Grupo_IdGrupo`),
+  CONSTRAINT `estudiante_ibfk_1` FOREIGN KEY (`Grupo_IdGrupo`) REFERENCES `grupo` (`IdGrupo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="grupo" view="colnames">
+<left>202</left>
+<top>0</top>
+<width>155</width>
+<height>146</height>
+<sql_create_table>CREATE TABLE `grupo` (
+  `IdGrupo` int(11) NOT NULL AUTO_INCREMENT,
+  `NombreGrupo` varchar(50) NOT NULL,
+  `Jornada_IdJornada` int(11) NOT NULL,
+  `Estado` int(1) NOT NULL,
+  PRIMARY KEY (`IdGrupo`),
+  KEY `Jornada_IdJornada` (`Jornada_IdJornada`),
+  CONSTRAINT `grupo_ibfk_1` FOREIGN KEY (`Jornada_IdJornada`) REFERENCES `jornada` (`Idjornada`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="grupo_has_materia" view="colnames">
+<left>362</left>
+<top>0</top>
+<width>197</width>
+<height>146</height>
+<sql_create_table>CREATE TABLE `grupo_has_materia` (
+  `Grupo_IdGrupo` int(11) NOT NULL,
+  `Grupo_Jornada_IdJornada` int(11) NOT NULL,
+  `Materia_IdMateria` int(11) NOT NULL,
+  `Estado` int(1) NOT NULL,
+  KEY `Grupo_IdGrupo` (`Grupo_IdGrupo`),
+  KEY `Materia_IdMateria` (`Materia_IdMateria`),
+  CONSTRAINT `grupo_has_materia_ibfk_1` FOREIGN KEY (`Grupo_IdGrupo`) REFERENCES `grupo` (`IdGrupo`),
+  CONSTRAINT `grupo_has_materia_ibfk_2` FOREIGN KEY (`Materia_IdMateria`) REFERENCES `materia` (`IdMateria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="jornada" view="colnames">
+<left>564</left>
+<top>0</top>
+<width>136</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `jornada` (
+  `Idjornada` int(11) NOT NULL AUTO_INCREMENT,
+  `NombreJornada` varchar(50) NOT NULL,
+  `Estado` int(1) NOT NULL,
+  PRIMARY KEY (`Idjornada`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="materia" view="colnames">
+<left>705</left>
+<top>0</top>
+<width>133</width>
+<height>146</height>
+<sql_create_table>CREATE TABLE `materia` (
+  `IdMateria` int(11) NOT NULL AUTO_INCREMENT,
+  `NombreMateria` varchar(50) NOT NULL,
+  `Intensidad` varchar(50) NOT NULL,
+  `Estado` int(1) NOT NULL,
+  PRIMARY KEY (`IdMateria`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="nota" view="colnames">
+<left>843</left>
+<top>0</top>
+<width>263</width>
+<height>282</height>
+<sql_create_table>CREATE TABLE `nota` (
+  `IdNota` int(11) NOT NULL AUTO_INCREMENT,
+  `Nota1` decimal(8,2) NOT NULL,
+  `Nota2` decimal(8,2) NOT NULL,
+  `Nota3` decimal(8,2) NOT NULL,
+  `Nota4` decimal(8,2) NOT NULL,
+  `NotaFinal` decimal(8,2) NOT NULL,
+  `Perodo_IdPeriodo` int(11) NOT NULL,
+  `Estudiante_IdEstudiante` int(11) NOT NULL,
+  `Estudiante_Grupo_IdGrupo` int(11) NOT NULL,
+  `Estudiante_Grupo_Jornada_IdJornada` int(11) NOT NULL,
+  `Materia_IdMateria` int(11) NOT NULL,
+  `Estado` int(1) NOT NULL,
+  PRIMARY KEY (`IdNota`),
+  KEY `Perodo_IdPeriodo` (`Perodo_IdPeriodo`),
+  KEY `Estudiante_IdEstudiante` (`Estudiante_IdEstudiante`),
+  CONSTRAINT `nota_ibfk_1` FOREIGN KEY (`Perodo_IdPeriodo`) REFERENCES `periodo` (`IdPerido`),
+  CONSTRAINT `nota_ibfk_2` FOREIGN KEY (`Estudiante_IdEstudiante`) REFERENCES `estudiante` (`IdEstudiante`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="periodo" view="colnames">
+<left>1111</left>
+<top>0</top>
+<width>134</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `periodo` (
+  `IdPerido` int(11) NOT NULL AUTO_INCREMENT,
+  `NombrePeriodo` varchar(50) NOT NULL,
+  `Estado` int(1) NOT NULL,
+  PRIMARY KEY (`IdPerido`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
