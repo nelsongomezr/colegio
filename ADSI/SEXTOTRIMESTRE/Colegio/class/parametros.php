@@ -1,8 +1,8 @@
 <?php 
-	define("host","localhost");
-	define("user","root");
+	define("serv","localhost");
+	define("base","colegio");
+	define("usua","root");
 	define("pass","");
-	define("base","estudiantes");
 	define("charset","utf8");
-	define("port",3306)
+	define("port","3306");
 ?>

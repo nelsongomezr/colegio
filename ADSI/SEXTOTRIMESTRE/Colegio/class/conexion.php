@@ -1,19 +1,15 @@
 <?php 
+require("parametros.php");
 class Conexion
 {
-	protected $serv="localhost";
-	protected $base="colegio";
-	protected $usua="root";
-	protected $pass="";
-	protected $charset="utf8";
-	protected $port=3306;
+
 	protected $conex;
 
 	public function Conexion()
 	{
 		try
 		{
-			$this->conex= new PDO("mysql:host=".$this->serv.";dbname=".$this->base.";charset=".$this->charset.";port=".$this->port,$this->usua,$this->pass);
+			$this->conex= new PDO("mysql:host=".serv.";dbname=".base.";charset=".charset.";port=".port,usua,pass);
 		}
 		catch(exception $e)
 		{
